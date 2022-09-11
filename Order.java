@@ -9,6 +9,7 @@ public class Order {
     private OrderList parentLimit;
 
     public void updateQuantity(int quantity){
+        // update the quantity of the order if move quantity is made, and move it to the tail of order list
         if (quantity > this.quantity){
             this.parentLimit.moveTail(this);
             this.parentLimit.setTotalCount(this.parentLimit.getTotalCount()-this.quantity+quantity);

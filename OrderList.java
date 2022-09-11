@@ -1,17 +1,22 @@
 public class OrderList {
     private int limitPrice;
+    // total number of order
     private int totalNumber = 0;
+    // total number of quantity
     private int totalCount = 0;
     private Order headOrder = null;
     private Order tailOrder = null;
 
     public void appendOrder(Order incomingOrder) {
+        // append the new order into the order list
+        // if the order list is empty, let it be the first one
         if (totalNumber == 0) {
-            incomingOrder.getNextOrder();
+            incomingOrder.setNextOrder(null);
             incomingOrder.setPrevOrder(null);
             headOrder = incomingOrder;
             tailOrder = incomingOrder;
         }
+        // append it at the tail
         else{
             incomingOrder.setNextOrder(null);
             incomingOrder.setPrevOrder(tailOrder);
@@ -25,9 +30,11 @@ public class OrderList {
     public void removeOrder(Order order){
         totalCount -= order.getQuantity();
         totalNumber -= 1;
+        // if the order is the last order, do nothing
         if (totalNumber == 0){
             return;
         }
+        // connect the head and tail of the deleted order
         else{
             Order tmpNextOrder = order.getNextOrder();
             Order tmpPrevOrder = order.getPrevOrder();
@@ -80,6 +87,7 @@ public class OrderList {
         return tailOrder;
     }
 
+    // update total quantity
     public void setTotalCount(int quantity) {
         this.totalCount += quantity;
     }
